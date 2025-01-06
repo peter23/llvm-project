@@ -228,25 +228,25 @@
 // CHECK-RV64-SAME: "-internal-isystem" "[[SYSROOT]]{{[/\\]+}}include{{[/\\]+}}c++{{[/\\]+}}v1"
 // CHECk-RV64-SAME: "-internal-isystem" "[[SYSROOT]]{{[/\\]+}}include"
 // CHECK-RV64-SAME: "-x" "c++" "{{.*}}baremetal.cpp"
-// CHECK-RV64-NEXT: ld{{(.exe)?}}" "--sysroot={{.*}}/Inputs/basic_riscv64_tree/riscv64-unknown-elf" "-Bstatic"
+// CHECK-RV64-NEXT: ld{{(.exe)?}}" "--sysroot={{.*}}/Inputs/basic_riscv64_tree/riscv64-unknown-elf" "-Bstatic" "-m" "elf64lriscv"  "-X"
 // CHECK-RV64-SAME: "-Lsome{{[/\\]+}}directory{{[/\\]+}}user{{[/\\]+}}asked{{[/\\]+}}for"
 // CHECK-RV64-SAME: "-L[[SYSROOT:[^"]+]]{{[/\\]+}}lib"
 // CHECK-RV64-SAME:"{{.*}}.o"
 // CHECK-RV64-SAME: "{{[^"]*}}libclang_rt.builtins.a"
 // CHECK-RV64-SAME: "-lc"
-// CHECK-RV64-SAME: "-X" "-o" "{{.*}}.tmp.out"
+// CHECK-RV64-SAME: "-o" "{{.*}}.tmp.out"
 
 // RUN: %clangxx %s -### --target=riscv64-unknown-elf 2>&1 \
 // RUN:     --sysroot=%S/Inputs/basic_riscv64_tree/riscv64-unknown-elf \
 // RUN:   | FileCheck --check-prefix=CHECK-RV64-DEFAULTCXX %s
 // CHECK-RV64-DEFAULTCXX: "-resource-dir" "[[RESOURCE_DIR:[^"]+]]"
-// CHECK-RV64-DEFAULTCXX: ld{{(.exe)?}}" "--sysroot={{.*}}{{[/\\]+}}Inputs{{[/\\]+}}basic_riscv64_tree{{[/\\]+}}riscv64-unknown-elf" "-Bstatic"
+// CHECK-RV64-DEFAULTCXX: ld{{(.exe)?}}" "--sysroot={{.*}}{{[/\\]+}}Inputs{{[/\\]+}}basic_riscv64_tree{{[/\\]+}}riscv64-unknown-elf" "-Bstatic" "-m" "elf64lriscv"  "-X"
 // CHECK-RV64-DEFAULTCXX-SAME: "-L{{[^"]*}}{{[/\\]+}}Inputs{{[/\\]+}}basic_riscv64_tree{{[/\\]+}}riscv64-unknown-elf{{[/\\]+}}lib"
 // CHECK-RV64-DEFAULTCXX-SAME:"{{.*}}.o"
 // CHECK-RV64-DEFAULTCXX-SAME: "-lc++" "-lm"
 // CHECK-RV64-DEFAULTCXX-SAME: "{{[^"]*}}libclang_rt.builtins.a"
 // CHECK-RV64-DEFAULTCXX-SAME: "-lc"
-// CHECK-RV64-DEFAULTCXX-SAME: "-X" "-o" "a.out"
+// CHECK-RV64-DEFAULTCXX-SAME: "-o" "a.out"
 
 // RUN: %clangxx %s -### --target=riscv64-unknown-elf 2>&1 \
 // RUN:     --sysroot=%S/Inputs/basic_riscv64_tree/riscv64-unknown-elf \
@@ -255,13 +255,13 @@
 // CHECK-RV64-LIBCXX: "-resource-dir" "[[RESOURCE_DIR:[^"]+]]"
 // CHECK-RV64-LIBCXX-NOT: "-internal-isystem" "{{[^"]+}}{{[/\\]+}}include{{[/\\]+}}c++{{[/\\]+}}{{[^v].*}}"
 // CHECK-RV64-LIBCXX-SAME: "-internal-isystem" "{{[^"]+}}{{[/\\]+}}include{{[/\\]+}}c++{{[/\\]+}}v1"
-// CHECK-RV64-LIBCXX: ld{{(.exe)?}}" "--sysroot={{.*}}{{[/\\]+}}Inputs{{[/\\]+}}basic_riscv64_tree{{[/\\]+}}riscv64-unknown-elf" "-Bstatic"
+// CHECK-RV64-LIBCXX: ld{{(.exe)?}}" "--sysroot={{.*}}{{[/\\]+}}Inputs{{[/\\]+}}basic_riscv64_tree{{[/\\]+}}riscv64-unknown-elf" "-Bstatic" "-m" "elf64lriscv"  "-X"
 // CHECK-RV64-LIBCXX-SAME: "-L{{[^"]*}}{{[/\\]+}}Inputs{{[/\\]+}}basic_riscv64_tree{{[/\\]+}}riscv64-unknown-elf{{[/\\]+}}lib"
 // CHECK-RV64-LIBCXX-SAME:"{{.*}}.o"
 // CHECK-RV64-LIBCXX-SAME: "-lc++" "-lm"
 // CHECK-RV64-LIBCXX-SAME: "{{[^"]*}}libclang_rt.builtins.a"
 // CHECK-RV64-LIBCXX-SAME: "-lc"
-// CHECK-RV64-LIBCXX-SAME: "-X" "-o" "a.out"
+// CHECK-RV64-LIBCXX-SAME: "-o" "a.out"
 
 // RUN: %clangxx %s -### 2>&1 --target=riscv64-unknown-elf \
 // RUN:     --sysroot=%S/Inputs/basic_riscv64_tree/riscv64-unknown-elf \
@@ -270,13 +270,13 @@
 // CHECK-RV64-LIBSTDCXX: "-resource-dir" "[[RESOURCE_DIR:[^"]+]]"
 // CHECK-RV64-LIBSTDCXX-NOT: "-internal-isystem" "{{[^"]+}}{{[/\\]+}}include{{[/\\]+}}c++{{[/\\]+}}v1"
 // CHECK-RV64-LIBSTDCXX-SAME: "-internal-isystem" "{{[^"]+}}{{[/\\]+}}include{{[/\\]+}}c++{{[/\\]+}}8.0.1"
-// CHECK-RV64-LIBSTDCXX: ld{{(.exe)?}}" "--sysroot={{.*}}{{[/\\]+}}Inputs{{[/\\]+}}basic_riscv64_tree{{[/\\]+}}riscv64-unknown-elf" "-Bstatic"
+// CHECK-RV64-LIBSTDCXX: ld{{(.exe)?}}" "--sysroot={{.*}}{{[/\\]+}}Inputs{{[/\\]+}}basic_riscv64_tree{{[/\\]+}}riscv64-unknown-elf" "-Bstatic" "-m" "elf64lriscv"  "-X"
 // CHECK-RV64-LIBSTDCXX-SAME: "-L{{[^"]*}}{{[/\\]+}}Inputs{{[/\\]+}}basic_riscv64_tree{{[/\\]+}}riscv64-unknown-elf{{[/\\]+}}lib"
 // CHECK-RV64-LIBSTDCXX-SAME: "{{.*}}.o"
 // CHECK-RV64-LIBSTDCXX-SAME: "-lstdc++" "-lm"
 // CHECK-RV64-LIBSTDCXX-SAME: "{{[^"]*}}libclang_rt.builtins.a"
 // CHECK-RV64-LIBSTDCXX-SAME: "-lc"
-// CHECK-RV64-LIBSTDCXX-SAME: "-X" "-o" "a.out"
+// CHECK-RV64-LIBSTDCXX-SAME: "-o" "a.out"
 
 // RUN: %clang %s -### 2>&1 --target=riscv32-unknown-elf \
 // RUN:     -L some/directory/user/asked/for \
@@ -288,25 +288,25 @@
 // CHECK-RV32-SAME: "-internal-isystem" "[[SYSROOT]]{{[/\\]+}}include{{[/\\]+}}c++{{[/\\]+}}v1"
 // CHECK-RV32-SAME: "-internal-isystem" "[[SYSROOT]]{{[/\\]+}}include"
 // CHECK-RV32-SAME: "-x" "c++" "{{.*}}baremetal.cpp"
-// CHECK-RV32-NEXT: ld{{(.exe)?}}" "--sysroot={{.*}}/Inputs/basic_riscv32_tree/riscv32-unknown-elf" "-Bstatic"
+// CHECK-RV32-NEXT: ld{{(.exe)?}}" "--sysroot={{.*}}/Inputs/basic_riscv32_tree/riscv32-unknown-elf" "-Bstatic" "-m" "elf32lriscv"  "-X"
 // CHECK-RV32-SAME: "-Lsome{{[/\\]+}}directory{{[/\\]+}}user{{[/\\]+}}asked{{[/\\]+}}for"
 // CHECK-RV32-SAME: "-L[[SYSROOT:[^"]+]]{{[/\\]+}}lib"
 // CHECK-RV32-SAME: "{{.*}}.o"
 // CHECK-RV32-SAME: "{{[^"]*}}libclang_rt.builtins.a"
 // CHECK-RV32-SAME: "-lc"
-// CHECK-RV32-SAME: "-X" "-o" "a.out"
+// CHECK-RV32-SAME: "-o" "a.out"
 
 // RUN: %clangxx %s -### 2>&1 --target=riscv32-unknown-elf \
 // RUN:     --sysroot=%S/Inputs/basic_riscv32_tree/riscv32-unknown-elf \
 // RUN:   | FileCheck --check-prefix=CHECK-RV32-DEFAULTCXX %s
 // CHECK-RV32-DEFAULTCXX: "-resource-dir" "[[RESOURCE_DIR:[^"]+]]"
-// CHECK-RV32-DEFAULTCXX: ld{{(.exe)?}}" "--sysroot={{.*}}{{[/\\]+}}Inputs{{[/\\]+}}basic_riscv32_tree{{[/\\]+}}riscv32-unknown-elf" "-Bstatic"
+// CHECK-RV32-DEFAULTCXX: ld{{(.exe)?}}" "--sysroot={{.*}}{{[/\\]+}}Inputs{{[/\\]+}}basic_riscv32_tree{{[/\\]+}}riscv32-unknown-elf" "-Bstatic" "-m" "elf32lriscv"  "-X"
 // CHECK-RV32-DEFAULTCXX-SAME: "-L{{[^"]*}}{{[/\\]+}}Inputs{{[/\\]+}}basic_riscv32_tree{{[/\\]+}}riscv32-unknown-elf{{[/\\]+}}lib"
 // CHECK-RV32-DEFAULTCXX-SAME: "{{.*}}.o"
 // CHECK-RV32-DEFAULTCXX-SAME: "-lc++" "-lm"
 // CHECK-RV32-DEFAULTCXX-SAME: "{{[^"]*}}libclang_rt.builtins.a"
 // CHECK-RV32-DEFAULTCXX-SAME: "-lc"
-// CHECK-RV32-DEFAULTCXX-SAME: "-X" "-o" "a.out"
+// CHECK-RV32-DEFAULTCXX-SAME: "-o" "a.out"
 
 // RUN: %clangxx %s -### 2>&1 --target=riscv32-unknown-elf \
 // RUN:     --sysroot=%S/Inputs/basic_riscv32_tree/riscv32-unknown-elf \
@@ -315,12 +315,12 @@
 // CHECK-RV32-LIBCXX: "-resource-dir" "[[RESOURCE_DIR:[^"]+]]"
 // CHECK-RV32-LIBCXX-NOT: "-internal-isystem" "{{[^"]+}}{{[/\\]+}}include{{[/\\]+}}c++{{[/\\]+}}{{[^v].*}}"
 // CHECK-RV32-LIBCXX-SAME: "-internal-isystem" "{{[^"]+}}{{[/\\]+}}include{{[/\\]+}}c++{{[/\\]+}}v1"
-// CHECK-RV32-LIBCXX: ld{{(.exe)?}}" "--sysroot={{.*}}{{[/\\]+}}Inputs{{[/\\]+}}basic_riscv32_tree{{[/\\]+}}riscv32-unknown-elf" "-Bstatic"
+// CHECK-RV32-LIBCXX: ld{{(.exe)?}}" "--sysroot={{.*}}{{[/\\]+}}Inputs{{[/\\]+}}basic_riscv32_tree{{[/\\]+}}riscv32-unknown-elf" "-Bstatic" "-m" "elf32lriscv"  "-X"
 // CHECK-RV32-LIBCXX-SAME: "-L{{[^"]*}}{{[/\\]+}}Inputs{{[/\\]+}}basic_riscv32_tree{{[/\\]+}}riscv32-unknown-elf{{[/\\]+}}lib"
 // CHECK-RV32-LIBCXX-SAME: "{{.*}}.o"
 // CHECK-RV32-LIBCXX-SAME: "-lc++" "-lm"
 // CHECK-RV32-LIBCXX-SAME: "{{[^"]*}}libclang_rt.builtins.a"
-// CHECK-RV32-LIBCXX-SAME: "-X" "-o" "a.out"
+// CHECK-RV32-LIBCXX-SAME: "-o" "a.out"
 
 // RUN: %clangxx %s -### 2>&1 --target=riscv32-unknown-elf \
 // RUN:     --sysroot=%S/Inputs/basic_riscv32_tree/riscv32-unknown-elf \
@@ -329,13 +329,13 @@
 // CHECK-RV32-LIBSTDCXX: "-resource-dir" "[[RESOURCE_DIR:[^"]+]]"
 // CHECK-RV32-LIBSTDCXX-NOT: "-internal-isystem" "{{[^"]+}}{{[/\\]+}}include{{[/\\]+}}c++{{[/\\]+}}v1"
 // CHECK-RV32-LIBSTDCXX-SAME: "-internal-isystem" "{{[^"]+}}{{[/\\]+}}include{{[/\\]+}}c++{{[/\\]+}}8.0.1"
-// CHECK-RV32-LIBSTDCXX: ld{{(.exe)?}}" "--sysroot={{.*}}{{[/\\]+}}Inputs{{[/\\]+}}basic_riscv32_tree{{[/\\]+}}riscv32-unknown-elf" "-Bstatic"
+// CHECK-RV32-LIBSTDCXX: ld{{(.exe)?}}" "--sysroot={{.*}}{{[/\\]+}}Inputs{{[/\\]+}}basic_riscv32_tree{{[/\\]+}}riscv32-unknown-elf" "-Bstatic" "-m" "elf32lriscv"  "-X"
 // CHECK-RV32-LIBSTDCXX-SAME: "-L{{[^"]*}}{{[/\\]+}}Inputs{{[/\\]+}}basic_riscv32_tree{{[/\\]+}}riscv32-unknown-elf{{[/\\]+}}lib"
 // CHECK-RV32-LIBSTDCXX-SAME: "{{.*}}.o"
 // CHECK-RV32-LIBSTDCXX-SAME: "-lstdc++" "-lm"
 // CHECK-RV32-LIBSTDCXX-SAME: "{{[^"]*}}libclang_rt.builtins.a"
 // CHECK-RV32-LIBSTDCXX-SAME: "-lc"
-// CHECK-RV32-LIBSTDCXX-SAME: "-X" "-o" "a.out"
+// CHECK-RV32-LIBSTDCXX-SAME: "-o" "a.out"
 
 // RUN: %clang %s -### 2>&1 --target=riscv64-unknown-elf \
 // RUN:     -nostdlibinc -nobuiltininc \
@@ -352,7 +352,7 @@
 // RUN:     -nodefaultlibs \
 // RUN:   | FileCheck --check-prefix=CHECK-RV64-NDL %s
 // CHECK-RV64-NDL: "-resource-dir" "[[RESOURCE_DIR:[^"]+]]"
-// CHECK-RV64-NDL: ld{{(.exe)?}}" "--sysroot={{.*}}{{[/\\]+}}Inputs{{[/\\]+}}basic_riscv64_tree{{[/\\]+}}riscv64-unknown-elf" "-Bstatic"
+// CHECK-RV64-NDL: ld{{(.exe)?}}" "--sysroot={{.*}}{{[/\\]+}}Inputs{{[/\\]+}}basic_riscv64_tree{{[/\\]+}}riscv64-unknown-elf" "-Bstatic" "-m" "elf64lriscv"  "-X"
 // CHECK-RV64-NDL-SAME: "-L{{[^"]*}}{{[/\\]+}}Inputs{{[/\\]+}}basic_riscv64_tree{{[/\\]+}}riscv64-unknown-elf{{[/\\]+}}lib"
 
 // RUN: %clang %s -### 2>&1 --target=riscv64-unknown-elf \
@@ -371,7 +371,7 @@
 // CHECK-RV64FD-SAME: "-internal-isystem" "[[SYSROOT]]{{[/\\]+}}rv64imafdc{{[/\\]+}}lp64d{{[/\\]+}}include{{[/\\]+}}c++{{[/\\]+}}v1"
 // CHECk-RV64FD-SAME: "-internal-isystem" "[[SYSROOT]]{{[/\\]+}}rv64imafdc{{[/\\]+}}lp64d{{[/\\]+}}include"
 // CHECK-RV64FD-SAME: "-x" "c++" "{{.*}}baremetal.cpp"
-// CHECK-RV64FD-NEXT: ld{{(.exe)?}}" "--sysroot={{.*}}{{[/\\]+}}Inputs{{[/\\]+}}basic_riscv64_tree{{[/\\]+}}riscv64-unknown-elf" "-Bstatic"
+// CHECK-RV64FD-NEXT: ld{{(.exe)?}}" "--sysroot={{.*}}{{[/\\]+}}Inputs{{[/\\]+}}basic_riscv64_tree{{[/\\]+}}riscv64-unknown-elf" "-Bstatic" "-m" "elf64lriscv"  "-X"
 // CHECK-RV64FD-SAME: "-L[[SYSROOT:[^"]+]]{{[/\\]+}}rv64imafdc{{[/\\]+}}lp64d{{[/\\]+}}lib"
 
 // RUN: %clang %s -### 2>&1 --target=riscv32-unknown-elf \
@@ -390,7 +390,7 @@
 // CHECK-RV32I-SAME: "-internal-isystem" "[[SYSROOT]]{{[/\\]+}}rv32i{{[/\\]+}}ilp32{{[/\\]+}}include{{[/\\]+}}c++{{[/\\]+}}v1"
 // CHECK-RV32I-SAME: "-internal-isystem" "[[SYSROOT]]{{[/\\]+}}rv32i{{[/\\]+}}ilp32{{[/\\]+}}include"
 // CHECK-RV32I-SAME: "-x" "c++" "{{.*}}baremetal.cpp"
-// CHECK-RV32I-NEXT: ld{{(.exe)?}}" "--sysroot={{.*}}{{[/\\]+}}Inputs{{[/\\]+}}basic_riscv32_tree{{[/\\]+}}riscv32-unknown-elf" "-Bstatic"
+// CHECK-RV32I-NEXT: ld{{(.exe)?}}" "--sysroot={{.*}}{{[/\\]+}}Inputs{{[/\\]+}}basic_riscv32_tree{{[/\\]+}}riscv32-unknown-elf" "-Bstatic" "-m" "elf32lriscv"  "-X"
 // CHECK-RV32I-SAME: "-L[[SYSROOT:[^"]+]]{{[/\\]+}}rv32i{{[/\\]+}}ilp32{{[/\\]+}}lib"
 
 // RUN: %clang %s -### 2>&1 --target=riscv32-unknown-elf \
@@ -409,7 +409,7 @@
 // CHECK-RV32IM-SAME: "-internal-isystem" "[[SYSROOT]]{{[/\\]+}}rv32im{{[/\\]+}}ilp32{{[/\\]+}}include{{[/\\]+}}c++{{[/\\]+}}v1"
 // CHECK-RV32IM-SAME: "-internal-isystem" "[[SYSROOT]]{{[/\\]+}}rv32im{{[/\\]+}}ilp32{{[/\\]+}}include"
 // CHECK-RV32IM-SAME: "-x" "c++" "{{.*}}baremetal.cpp"
-// CHECK-RV32IM-NEXT: ld{{(.exe)?}}" "--sysroot={{.*}}{{[/\\]+}}Inputs{{[/\\]+}}basic_riscv32_tree{{[/\\]+}}riscv32-unknown-elf" "-Bstatic"
+// CHECK-RV32IM-NEXT: ld{{(.exe)?}}" "--sysroot={{.*}}{{[/\\]+}}Inputs{{[/\\]+}}basic_riscv32_tree{{[/\\]+}}riscv32-unknown-elf" "-Bstatic" "-m" "elf32lriscv"  "-X"
 // CHECK-RV32IM-SAME: "-L[[SYSROOT:[^"]+]]{{[/\\]+}}rv32im{{[/\\]+}}ilp32{{[/\\]+}}lib"
 
 // RUN: %clang %s -### 2>&1 --target=riscv32-unknown-elf \
@@ -423,7 +423,7 @@
 // CHECK-RV32IAC-SAME: "-internal-isystem" "[[SYSROOT]]{{[/\\]+}}rv32iac{{[/\\]+}}ilp32{{[/\\]+}}include{{[/\\]+}}c++{{[/\\]+}}v1"
 // CHECK-RV32IAC-SAME: "-internal-isystem" "[[SYSROOT]]{{[/\\]+}}rv32iac{{[/\\]+}}ilp32{{[/\\]+}}include"
 // CHECK-RV32IAC-SAME: "-x" "c++" "{{.*}}baremetal.cpp"
-// CHECK-RV32IAC-NEXT: ld{{(.exe)?}}" "--sysroot={{.*}}{{[/\\]+}}Inputs{{[/\\]+}}basic_riscv32_tree{{[/\\]+}}riscv32-unknown-elf" "-Bstatic"
+// CHECK-RV32IAC-NEXT: ld{{(.exe)?}}" "--sysroot={{.*}}{{[/\\]+}}Inputs{{[/\\]+}}basic_riscv32_tree{{[/\\]+}}riscv32-unknown-elf" "-Bstatic" "-m" "elf32lriscv"  "-X"
 // CHECK-RV32IAC-SAME: "-L[[SYSROOT:[^"]+]]{{[/\\]+}}rv32iac{{[/\\]+}}ilp32{{[/\\]+}}lib"
 
 // RUN: %clang %s -### 2>&1 --target=riscv32-unknown-elf -march=rv32imafc -mabi=ilp32f \
@@ -444,7 +444,7 @@
 // CHECK-RV32IMAFC-SAME: "-internal-isystem" "[[SYSROOT]]{{[/\\]+}}rv32imafc{{[/\\]+}}ilp32f{{[/\\]+}}include{{[/\\]+}}c++{{[/\\]+}}v1"
 // CHECK-RV32IMAFC-SAME: "-internal-isystem" "[[SYSROOT]]{{[/\\]+}}rv32imafc{{[/\\]+}}ilp32f{{[/\\]+}}include"
 // CHECK-RV32IMAFC-SAME: "-x" "c++" "{{.*}}baremetal.cpp"
-// CHECK-RV32IMAFC-NEXT: ld{{(.exe)?}}" "--sysroot={{.*}}{{[/\\]+}}Inputs{{[/\\]+}}basic_riscv32_tree{{[/\\]+}}riscv32-unknown-elf" "-Bstatic"
+// CHECK-RV32IMAFC-NEXT: ld{{(.exe)?}}" "--sysroot={{.*}}{{[/\\]+}}Inputs{{[/\\]+}}basic_riscv32_tree{{[/\\]+}}riscv32-unknown-elf" "-Bstatic" "-m" "elf32lriscv"  "-X"
 // CHECK-RV32IMAFC-SAME: "-L[[SYSROOT:[^"]+]]{{[/\\]+}}rv32imafc{{[/\\]+}}ilp32f{{[/\\]+}}lib"
 
 // RUN: %clang -no-canonical-prefixes %s -### --target=powerpc-unknown-eabi 2>&1 \
